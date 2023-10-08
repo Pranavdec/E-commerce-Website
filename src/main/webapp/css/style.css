@@ -7,6 +7,17 @@ body {
     flex: 1;
 }
 
-.bottom_margin_col {
-    margin-bottom: 20px;
+.image-wrapper {
+    width: 90%;
+    padding-top: 90%;
+    position: relative;
+}
+
+.my-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }

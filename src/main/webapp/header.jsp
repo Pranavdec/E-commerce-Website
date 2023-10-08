@@ -48,9 +48,11 @@
                 <%
                     String user = (String) session.getAttribute("user");
                     String servletURL = "login_user";
+                    String cartURL = "cart";
                     if (user != null) {
                 %>
-                <a href="#" class="navbar-cart">
+                <a href="<%= cartURL %>" class="navbar-cart">
+
                     <i class="fas fa-shopping-cart"></i> Cart
                 </a>
                 <%
