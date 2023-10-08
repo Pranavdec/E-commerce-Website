@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.util.Properties;
 
 public class LoginUserDatabase {
-    private static Properties getDbProperties(){
+    public static Properties getDbProperties(){
         Properties prop = new Properties();
 
         ClassLoader classLoader = RegisterUserDatabase.class.getClassLoader();

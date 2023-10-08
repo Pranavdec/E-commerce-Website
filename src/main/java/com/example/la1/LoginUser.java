@@ -5,6 +5,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.*;
 
@@ -23,7 +24,9 @@ public class LoginUser extends HttpServlet{
         RequestDispatcher dispatcher = request.getRequestDispatcher("login_user.jsp");
         String query = LoginUserDatabase.Query(email, password);
         if (query.equals("Success")) {
-            response.sendRedirect("index.jsp");
+            HttpSession session = request.getSession();
+            session.setAttribute("user", email);
+            IndexPage.CreateCards(request, response);
         } else {
             request.setAttribute("error", query);
             dispatcher.forward(request, response);
