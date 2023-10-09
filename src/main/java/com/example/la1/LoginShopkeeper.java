@@ -9,9 +9,10 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.*;
 
-public class LoginUser extends HttpServlet{
+public class LoginShopkeeper extends HttpServlet{
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        System.out.println("LoginShopkeeper doGet");
         RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
         request.setAttribute("error", "");
         dispatcher.forward(request, response);
@@ -22,14 +23,16 @@ public class LoginUser extends HttpServlet{
         String password = request.getParameter("password");
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
-        String query = LoginUserDatabase.Query(email, password);
-        if (query.equals("Success")) {
-            HttpSession session = request.getSession();
-            session.setAttribute("user", email);
-            IndexPage.CreateCards(request, response);
-        } else {
+        String query = LoginShopkeeperDatabase.Query(email, password);
+        if (query.equals("Incorrect password.")) {
             request.setAttribute("error", query);
             dispatcher.forward(request, response);
+        } else {
+            HttpSession session = request.getSession();
+            session.setAttribute("Shopkeeper_email", email);
+            session.setAttribute("Shopkeeper", query);
+            IndexPage.CreateCards(request, response);
+
         }
 
     }

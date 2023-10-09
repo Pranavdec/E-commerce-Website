@@ -23,6 +23,24 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>RegisterShopkeeper</servlet-name>
+        <servlet-class>com.example.la1.RegisterShopkeeper</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RegisterShopkeeper</servlet-name>
+        <url-pattern>/register_shopkeeper</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>LoginShopkeeper</servlet-name>
+        <servlet-class>com.example.la1.LoginShopkeeper</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LoginShopkeeper</servlet-name>
+        <url-pattern>/login_shopkeeper</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>Home</servlet-name>
         <servlet-class>com.example.la1.Home</servlet-class>
     </servlet>

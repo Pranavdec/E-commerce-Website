@@ -7,8 +7,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.*;
+import java.util.Objects;
 
-public class RegisterUser extends HttpServlet {
+public class RegisterShopkeeper extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         RequestDispatcher dispatcher = request.getRequestDispatcher("register.jsp");
@@ -20,19 +21,27 @@ public class RegisterUser extends HttpServlet {
         String email = request.getParameter("email");
         String contact = request.getParameter("contact");
         String address = request.getParameter("address");
+        String company_name = request.getParameter("company_name");
         String password = request.getParameter("password");
         String password2 = request.getParameter("password_confirm");
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("register.jsp");
         if (password.equals(password2)) {
-            String query = RegisterUserDatabase.QueryEmail(email);
+            String query = RegisterShopkeeperDatabase.QueryEmail(email);
             System.out.println(query);
 
             if (query.equals("Email")) {
-                RegisterUserDatabase.InsertUser(email, password, contact, address);
-                RequestDispatcher dispatcher2 = request.getRequestDispatcher("login.jsp");
-                request.setAttribute("error", "");
-                dispatcher2.forward(request, response);
+                String error = RegisterShopkeeperDatabase.InsertShopkeeper(email, password, contact, address, company_name);
+                if (!Objects.equals(error, "Success")){
+                    request.setAttribute("error", "Company name already exists in the database.");
+                    dispatcher.forward(request, response);
+                }
+                else{
+                    RequestDispatcher dispatcher2 = request.getRequestDispatcher("login.jsp");
+                    request.setAttribute("error", "");
+                    dispatcher2.forward(request, response);
+                }
+
             } else {
                 request.setAttribute("error", query);
                 dispatcher.forward(request, response);
