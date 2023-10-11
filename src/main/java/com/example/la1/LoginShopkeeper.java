@@ -28,8 +28,10 @@ public class LoginShopkeeper extends HttpServlet{
             dispatcher.forward(request, response);
         } else {
             HttpSession session = request.getSession();
-            session.setAttribute("Shopkeeper_email", email);
-            session.setAttribute("Shopkeeper", query);
+            synchronized (session) {
+                session.setAttribute("Shopkeeper_email", email);
+                session.setAttribute("Shopkeeper", query);
+            }
             try {
                 ShopkeeperPage.Home(request, response);
             } catch (ClassNotFoundException e) {

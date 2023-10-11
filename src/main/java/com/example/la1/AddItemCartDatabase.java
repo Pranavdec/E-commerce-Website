@@ -28,6 +28,32 @@ public class AddItemCartDatabase {
         }
     }
 
+    public static Boolean IsItemPresent(String email, Integer item_id){
+        Properties props = LoginUserDatabase.getDbProperties();
+
+        String url = props.getProperty("db.url");
+        String user = props.getProperty("db.user");
+        String password = props.getProperty("db.passwd");
+
+        String query = "SELECT * FROM cart WHERE user_email = ? AND item_id = ?";
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            try (Connection con = DriverManager.getConnection(url, user, password);
+                 PreparedStatement st = con.prepareStatement(query)) {
+
+                st.setString(1, email);
+                st.setInt(2, item_id);
+                ResultSet rs = st.executeQuery();
+                if (rs.next()) {
+                    return true;
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
+    }
+
     public static List<Map<String, Object>> GetData(String email){
         Properties props = LoginUserDatabase.getDbProperties();
 

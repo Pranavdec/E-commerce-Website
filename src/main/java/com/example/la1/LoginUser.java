@@ -25,7 +25,9 @@ public class LoginUser extends HttpServlet{
         String query = LoginUserDatabase.Query(email, password);
         if (query.equals("Success")) {
             HttpSession session = request.getSession();
-            session.setAttribute("user", email);
+            synchronized(session) {
+                session.setAttribute("user", email);
+            }
             IndexPage.CreateCards(request, response);
         } else {
             request.setAttribute("error", query);

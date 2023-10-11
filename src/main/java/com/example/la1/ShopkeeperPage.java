@@ -22,30 +22,33 @@ public class ShopkeeperPage {
             Connection con = DriverManager.getConnection(url, user, password);
 
             HttpSession session = request.getSession();
-            String company_name = (String) session.getAttribute("Shopkeeper");
+            synchronized (session) {
+                String company_name = (String) session.getAttribute("Shopkeeper");
 
-            String query = "SELECT * From Item WHERE company_name = ?";
-            try(PreparedStatement st = con.prepareStatement(query)){
-                System.out.println(company_name);
-                st.setString(1, company_name);
-                ResultSet rs = st.executeQuery();
-                StringBuilder itemstable = new StringBuilder();
-                itemstable.append("<table border=\"1\">");
-                itemstable.append("<tr><th>Item ID></th><th>Item Name</th><th>Item Price</th><th>Item Quantity</th><th>Item Company</th><th>Description</th><th>category</th></tr>");
-                while(rs.next()){
-                    itemstable.append("<tr>");
-                    itemstable.append("<td>").append(rs.getString("item_id")).append("</td>");
-                    itemstable.append("<td>").append(rs.getString("item_name")).append("</td>");
-                    itemstable.append("<td>").append(rs.getString("price")).append("</td>");
-                    itemstable.append("<td>").append(rs.getString("quantity")).append("</td>");
-                    itemstable.append("<td>").append(rs.getString("company_name")).append("</td>");
-                    itemstable.append("<td>").append(rs.getString("description")).append("</td>");
-                    itemstable.append("<td>").append(rs.getString("category")).append("</td>");
-                    itemstable.append("</tr>");
+
+                String query = "SELECT * From Item WHERE company_name = ?";
+                try (PreparedStatement st = con.prepareStatement(query)) {
+                    System.out.println(company_name);
+                    st.setString(1, company_name);
+                    ResultSet rs = st.executeQuery();
+                    StringBuilder itemstable = new StringBuilder();
+                    itemstable.append("<table border=\"1\">");
+                    itemstable.append("<tr><th>Item ID></th><th>Item Name</th><th>Item Price</th><th>Item Quantity</th><th>Item Company</th><th>Description</th><th>category</th></tr>");
+                    while (rs.next()) {
+                        itemstable.append("<tr>");
+                        itemstable.append("<td>").append(rs.getString("item_id")).append("</td>");
+                        itemstable.append("<td>").append(rs.getString("item_name")).append("</td>");
+                        itemstable.append("<td>").append(rs.getString("price")).append("</td>");
+                        itemstable.append("<td>").append(rs.getString("quantity")).append("</td>");
+                        itemstable.append("<td>").append(rs.getString("company_name")).append("</td>");
+                        itemstable.append("<td>").append(rs.getString("description")).append("</td>");
+                        itemstable.append("<td>").append(rs.getString("category")).append("</td>");
+                        itemstable.append("</tr>");
+                    }
+                    request.setAttribute("items_table", itemstable.toString());
+                    request.getRequestDispatcher("shopkeeper.jsp").forward(request, response);
+
                 }
-                request.setAttribute("items_table", itemstable.toString());
-                request.getRequestDispatcher("shopkeeper.jsp").forward(request, response);
-
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());

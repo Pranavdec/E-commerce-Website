@@ -24,16 +24,19 @@ public class UpdateItemPage extends HttpServlet {
         }
 
         HttpSession session = request.getSession();
-        String company_name = (String) session.getAttribute("Shopkeeper");
-        List<String> itemNames = ShopkeeperDatabase.GetItems(company_name);
-        request.setAttribute("itemNames", itemNames);
+        synchronized (session){
+            String company_name = (String) session.getAttribute("Shopkeeper");
+            List<String> itemNames = ShopkeeperDatabase.GetItems(company_name);
+            request.setAttribute("itemNames", itemNames);
 
-        try {
-            RequestDispatcher dispatcher = request.getRequestDispatcher("updateItem.jsp");
-            dispatcher.forward(request, response);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+            try {
+                RequestDispatcher dispatcher = request.getRequestDispatcher("updateItem.jsp");
+                dispatcher.forward(request, response);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
         }
+
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)

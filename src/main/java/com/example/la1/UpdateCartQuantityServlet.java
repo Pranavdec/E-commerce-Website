@@ -11,12 +11,14 @@ import java.io.IOException;
 public class UpdateCartQuantityServlet extends HttpServlet{
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        String email = (String) session.getAttribute("user");
-        Integer cart_id = Integer.parseInt(request.getParameter("cartId"));
-        Integer quantity = Integer.parseInt(request.getParameter("quantity"));
-        AddItemCartDatabase.UpdateCartQuantity(email, cart_id, quantity);
+        synchronized (session) {
+            String email = (String) session.getAttribute("user");
+            Integer cart_id = Integer.parseInt(request.getParameter("cartId"));
+            Integer quantity = Integer.parseInt(request.getParameter("quantity"));
+            AddItemCartDatabase.UpdateCartQuantity(email, cart_id, quantity);
 
-        request.getRequestDispatcher("cart").forward(request, response);
+            request.getRequestDispatcher("cart").forward(request, response);
+        }
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

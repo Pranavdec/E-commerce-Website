@@ -11,11 +11,16 @@ import java.io.IOException;
 public class AddItemCart extends HttpServlet{
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        String email = (String) session.getAttribute("user");
-        Integer item_id = Integer.parseInt(request.getParameter("item_id"));
-        Integer quantity = 1;
-        AddItemCartDatabase.Query(email, item_id, quantity);
-        request.getRequestDispatcher("redirect.jsp").forward(request, response);
+        synchronized (session) {
+            String email = (String) session.getAttribute("user");
+            Integer item_id = Integer.parseInt(request.getParameter("item_id"));
+            Integer quantity = 1;
+            if (!AddItemCartDatabase.IsItemPresent(email, item_id)){
+                AddItemCartDatabase.Query(email, item_id, quantity);
+            }
+            request.getRequestDispatcher("redirect.jsp").forward(request, response);
+        }
+
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
