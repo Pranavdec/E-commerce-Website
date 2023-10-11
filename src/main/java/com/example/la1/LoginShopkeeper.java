@@ -12,7 +12,6 @@ import java.io.*;
 public class LoginShopkeeper extends HttpServlet{
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        System.out.println("LoginShopkeeper doGet");
         RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
         request.setAttribute("error", "");
         dispatcher.forward(request, response);
@@ -31,7 +30,11 @@ public class LoginShopkeeper extends HttpServlet{
             HttpSession session = request.getSession();
             session.setAttribute("Shopkeeper_email", email);
             session.setAttribute("Shopkeeper", query);
-            IndexPage.CreateCards(request, response);
+            try {
+                ShopkeeperPage.Home(request, response);
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
 
         }
 
