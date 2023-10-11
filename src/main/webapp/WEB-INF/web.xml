@@ -94,6 +94,15 @@
         <url-pattern>/itemList</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>AddItem</servlet-name>
+        <servlet-class>com.example.la1.AddItemPage</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddItem</servlet-name>
+        <url-pattern>/itemAdd</url-pattern>
+    </servlet-mapping>
+
     <welcome-file-list>
         <welcome-file>redirect.jsp</welcome-file>
     </welcome-file-list>

@@ -23,7 +23,7 @@
                 </div>
             </form>
 
-            <form action="itemList" method="post">
+            <form action="itemList" method="post" enctype="multipart/form-data">
                 <%
                     Dictionary<String, String> itemDetails = (Dictionary<String, String>) request.getAttribute("itemDetails");
                     if (itemDetails != null) {
@@ -48,6 +48,10 @@
                 <div class="form-group">
                     <label for="itemCategory">Item Category:</label>
                     <input type="text" id="itemCategory" name="itemCategory" class="form-control" value="<%= itemDetails.get("category") %>" />
+                </div>
+                <div class="form-group">
+                    <label for="file">Item Image:</label>
+                    <input type="file" name="file" id="file">
                 </div>
                 <button type="submit" class="btn btn-primary">Update</button>
                 <br>

@@ -11,35 +11,20 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.Dictionary;
-import java.util.List;
 
 @MultipartConfig
-public class UpdateItemPage extends HttpServlet {
-    public void doGet(HttpServletRequest request, HttpServletResponse response) {
-        String selectedItem = request.getParameter("selectedItem");
-        if (selectedItem != null && !selectedItem.isEmpty()) {
-            Dictionary<String, String> itemDetails = ShopkeeperDatabase.GetItemDetails(selectedItem);
-            request.setAttribute("itemDetails", itemDetails);
-        }
+public class AddItemPage extends HttpServlet{
 
-        HttpSession session = request.getSession();
-        String company_name = (String) session.getAttribute("Shopkeeper");
-        List<String> itemNames = ShopkeeperDatabase.GetItems(company_name);
-        request.setAttribute("itemNames", itemNames);
-
-        try {
-            RequestDispatcher dispatcher = request.getRequestDispatcher("updateItem.jsp");
-            dispatcher.forward(request, response);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("additem.jsp");
+        dispatcher.forward(request, response);
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        String item_id = request.getParameter("itemId");
+        HttpSession session = request.getSession();
+        String company_name = (String) session.getAttribute("Shopkeeper");
         String item_name = request.getParameter("itemName");
         String item_price = request.getParameter("itemPrice");
         String item_quantity = request.getParameter("itemQuantity");
@@ -58,9 +43,9 @@ public class UpdateItemPage extends HttpServlet {
 
         String item_image_path = "images" + File.separator + fileName;
 
-        ShopkeeperDatabase.UpdateDetails(item_name, item_price, item_quantity, item_description, item_category, item_id,item_image_path);
+        ShopkeeperDatabase.AddItem(item_name, item_price, item_quantity, item_description, item_category, item_image_path, company_name);
 
         doGet(request, response);
-
     }
+
 }

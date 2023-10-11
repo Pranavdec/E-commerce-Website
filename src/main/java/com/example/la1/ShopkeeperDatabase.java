@@ -1,9 +1,5 @@
 package com.example.la1;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -77,7 +73,7 @@ public class ShopkeeperDatabase {
         return null;
     }
 
-    public static void UpdateDetails(String ItemName,String Price, String Quantity, String Description, String Category, String item_id) {
+    public static void UpdateDetails(String ItemName,String Price, String Quantity, String Description, String Category, String item_id,String image_path) {
         Properties props = LoginUserDatabase.getDbProperties();
 
         String url = props.getProperty("db.url");
@@ -87,7 +83,7 @@ public class ShopkeeperDatabase {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection(url, user, password);
 
-            String query = "UPDATE Item SET item_name = ?, price = ?, quantity = ?, description = ?, category = ? WHERE item_id = ?";
+            String query = "UPDATE Item SET item_name = ?, price = ?, quantity = ?, description = ?, category = ?,image_path = ? WHERE item_id = ?";
             try (PreparedStatement st = con.prepareStatement(query)) {
                 st.setString(1, ItemName);
                 st.setString(2, Price);
@@ -95,15 +91,20 @@ public class ShopkeeperDatabase {
                 st.setString(4, Description);
                 st.setString(5, Category);
                 st.setString(7, item_id);
+                st.setString(6, image_path);
+
+                System.out.println(st.toString());
 
                 st.executeUpdate();
+                System.out.println("Item Updated");
             }
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
 
-    public static String AddItem(String ItemName,String Price, String Quantity, String Description, String Category,String ImagePath, HttpServletRequest request){
+    public static void AddItem(String ItemName,String Price, String Quantity, String Description, String Category,String ImagePath, String company_name){
 
         Properties props = LoginUserDatabase.getDbProperties();
 
@@ -114,8 +115,6 @@ public class ShopkeeperDatabase {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection(url, user, password);
 
-            HttpSession session = request.getSession();
-            String company_name = (String) session.getAttribute("Shopkeeper");
 
             String query = "INSERT INTO Item (item_name, price, quantity, description, category, company_name, image_path) VALUES (?, ?, ?, ?, ?, ?, ?)";
             try (PreparedStatement st = con.prepareStatement(query)) {
@@ -128,10 +127,10 @@ public class ShopkeeperDatabase {
                 st.setString(7, ImagePath);
 
                 st.executeUpdate();
-                return "Success";
+                System.out.println("Item Added");
             }
         } catch (Exception e) {
-            return e.getMessage();
+            System.out.println(e.getMessage());
         }
 
     }
