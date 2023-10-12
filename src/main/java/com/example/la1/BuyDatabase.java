@@ -3,7 +3,7 @@ package com.example.la1;
 import java.sql.*;
 import java.util.*;
 
-public class buyDatabase {
+public class BuyDatabase {
     public static HashMap<String, Object> Query(String email) {
         Properties props = LoginUserDatabase.getDbProperties();
 

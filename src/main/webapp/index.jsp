@@ -2,12 +2,27 @@
 <%@ include file="header.jsp"%>
 <div class="content">
     <br>
+    <% String redirect_url = "home"; %>
+    <form action="<%=redirect_url%>" method="post" id="paginationForm">
+        <label for="itemsPerPage">Items per Page</label>
+        <input type="number" name="itemsPerPage" id="itemsPerPage" required />
+    </form>
+    <br>
     <div class="container">
         <div class="row row-cols-auto">
             <%= request.getAttribute("cardsHtml") %>
         </div>
     </div>
 </div>
+<%--<script>--%>
+<%--    document.addEventListener('DOMContentLoaded', function () {--%>
+<%--        let element = document.getElementById('itemsPerPage');--%>
+
+<%--        element.addEventListener('change', function() {--%>
+<%--            document.getElementById('paginationForm').submit();--%>
+<%--        });--%>
+<%--    });--%>
+<%--</script>--%>
 <%@ include file="footer.jsp"%>
 
 
@@ -21,4 +36,5 @@
         }
     });
 </script>
+
 

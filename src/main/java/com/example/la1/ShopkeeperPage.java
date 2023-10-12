@@ -33,7 +33,7 @@ public class ShopkeeperPage {
                     ResultSet rs = st.executeQuery();
                     StringBuilder itemstable = new StringBuilder();
                     itemstable.append("<table border=\"1\">");
-                    itemstable.append("<tr><th>Item ID></th><th>Item Name</th><th>Item Price</th><th>Item Quantity</th><th>Item Company</th><th>Description</th><th>category</th></tr>");
+                    itemstable.append("<tr><th>Item ID</th><th>Item Name</th><th>Item Price</th><th>Item Quantity</th><th>Item Company</th><th>Description</th><th>category</th></tr>");
                     while (rs.next()) {
                         itemstable.append("<tr>");
                         itemstable.append("<td>").append(rs.getString("item_id")).append("</td>");
@@ -45,6 +45,7 @@ public class ShopkeeperPage {
                         itemstable.append("<td>").append(rs.getString("category")).append("</td>");
                         itemstable.append("</tr>");
                     }
+                    itemstable.append("</table>");
                     request.setAttribute("items_table", itemstable.toString());
                     request.getRequestDispatcher("shopkeeper.jsp").forward(request, response);
 

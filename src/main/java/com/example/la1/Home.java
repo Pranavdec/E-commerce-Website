@@ -11,4 +11,7 @@ public class Home extends HttpServlet{
         IndexPage.CreateCards(request, response);
     }
 
+    public void doPost(HttpServletRequest request, HttpServletResponse response) {
+        IndexPage.CreateCards(request, response);
+    }
 }

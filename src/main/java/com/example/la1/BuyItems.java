@@ -1,6 +1,5 @@
 package com.example.la1;
 
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -12,7 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class buyItems extends HttpServlet {
+public class BuyItems extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         HttpSession session = request.getSession();
@@ -24,7 +23,7 @@ public class buyItems extends HttpServlet {
         }
 
         try {
-            HashMap<String, Object> result = buyDatabase.Query(email);
+            HashMap<String, Object> result = BuyDatabase.Query(email);
 
             List<Map<String, Integer>> successful = (List<Map<String, Integer>>) result.get("successful");
             List<Map<String, Integer>> unsuccessful = (List<Map<String, Integer>>) result.get("unsuccessful");
@@ -53,13 +52,7 @@ public class buyItems extends HttpServlet {
             }
             out.println("</table>");
 
-
-
-            // Forward successful and unsuccessful lists to JSP or another servlet
-//            request.setAttribute("successful", successful);
-//            request.setAttribute("unsuccessful", unsuccessful);
-//            RequestDispatcher rd = request.getRequestDispatcher("resultPage.jsp");
-//            rd.forward(request, response);
+            out.println("</body></html>");
 
         } catch (Exception e) {
             System.out.println(e.getMessage());

@@ -7,9 +7,12 @@ import java.sql.*;
 import java.util.Properties;
 
 public class IndexPage {
-    public static void CreateCards(HttpServletRequest request, HttpServletResponse response){
+    public static void CreateCards(HttpServletRequest request, HttpServletResponse response) {
+        String items_per_page = request.getParameter("items_per_page");
+        if(items_per_page == null){
+            items_per_page = "10";
+        }
         Properties props = LoginUserDatabase.getDbProperties();
-
         String url = props.getProperty("db.url");
         String user = props.getProperty("db.user");
         String password = props.getProperty("db.passwd");
@@ -21,11 +24,14 @@ public class IndexPage {
             String query = """
                     SELECT * FROM Item
                     ORDER BY RAND()
-                    LIMIT 10;
+                    LIMIT ?;
                     """;
 
-            try (Statement st = con.createStatement()) {
-                ResultSet rs = st.executeQuery(query);
+            int items_per_page_int = Integer.parseInt(items_per_page);
+            try (PreparedStatement pst = con.prepareStatement(query)) {
+                pst.setInt(1, items_per_page_int);
+                ResultSet rs = pst.executeQuery();
+
                 StringBuilder cardsHtml = new StringBuilder();
                 while (rs.next()) {
                     String item_id = rs.getString("item_id");
@@ -48,13 +54,9 @@ public class IndexPage {
                 request.setAttribute("cardsHtml", cardsHtml.toString());
 
                 request.getRequestDispatcher("index.jsp").forward(request, response);
-
             }
-
-
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-
     }
 }
