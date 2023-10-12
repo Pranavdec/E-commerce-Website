@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="SqlDialectMappings">
-    <file url="file://$PROJECT_DIR$/src/main/java/com/example/la1/AddItemCartDatabase.java" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/example/la1/Database/AddItemCartDatabase.java" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/example/la1/Database/LoginShopkeeperDatabase.java" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/example/la1/IndexPage.java" dialect="MySQL" />
-    <file url="file://$PROJECT_DIR$/src/main/java/com/example/la1/LoginShopkeeperDatabase.java" dialect="MySQL" />
     <file url="PROJECT" dialect="MySQL" />
   </component>
 </project>

@@ -1,29 +1,17 @@
-package com.example.la1;
+package com.example.la1.Database;
 
-import java.io.IOException;
-import java.io.InputStream;
+import com.example.la1.Database.LoginUserDatabase;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Properties;
 
-public class RegisterUserDatabase {
-    private static Properties getDbProperties(){
-        Properties prop = new Properties();
-
-        ClassLoader classLoader = RegisterUserDatabase.class.getClassLoader();
-
-        try(InputStream inputStream = classLoader.getResourceAsStream("db.properties")) {
-            prop.load(inputStream);
-        } catch (IOException ex) {
-            System.out.println("Error: " + ex.getMessage());
-        }
-        return  prop;
-    }
+public class RegisterShopkeeperDatabase {
 
     public static String QueryEmail(String email) {
-        Properties props = getDbProperties();
+        Properties props = LoginUserDatabase.getDbProperties();
 
         String url = props.getProperty("db.url");
         String user = props.getProperty("db.user");
@@ -32,7 +20,7 @@ public class RegisterUserDatabase {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection(url, user, password);
 
-            String query = "SELECT * FROM User WHERE email = ?";
+            String query = "SELECT * FROM shopkeeper WHERE email = ?";
 
             try (PreparedStatement st = con.prepareStatement(query)) {
                 st.setString(1, email);
@@ -52,8 +40,8 @@ public class RegisterUserDatabase {
         return "Error: Something went wrong with the query.";
     }
 
-    public static void InsertUser(String email, String password, String contact, String address) {
-        Properties props = getDbProperties();
+    public static String InsertShopkeeper(String email, String password, String contact, String address, String company_name) {
+        Properties props = LoginUserDatabase.getDbProperties();
 
         String url = props.getProperty("db.url");
         String user = props.getProperty("db.user");
@@ -62,19 +50,20 @@ public class RegisterUserDatabase {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection(url, user, passwd);
 
-            String query = "INSERT INTO User VALUES (?, ?, ?, ?)";
+            String query = "INSERT INTO shopkeeper VALUES (?, ?, ?, ?, ?)";
 
             try (PreparedStatement st = con.prepareStatement(query)) {
                 st.setString(1, password);
                 st.setString(2, email);
                 st.setString(3, contact);
                 st.setString(4, address);
+                st.setString(5, company_name);
 
                 st.executeUpdate();
-                System.out.println("User inserted.");
+                return  "Success";
             }
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            return e.getMessage();
         }
     }
 

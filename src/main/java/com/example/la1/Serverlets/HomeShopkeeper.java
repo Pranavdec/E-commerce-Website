@@ -1,5 +1,6 @@
-package com.example.la1;
+package com.example.la1.Serverlets;
 
+import com.example.la1.ShopkeeperPage;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

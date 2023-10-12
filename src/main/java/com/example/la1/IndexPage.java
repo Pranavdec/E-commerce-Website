@@ -1,14 +1,20 @@
 package com.example.la1;
 
+import com.example.la1.Database.LoginUserDatabase;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.sql.*;
 import java.util.Properties;
 
 public class IndexPage {
     public static void CreateCards(HttpServletRequest request, HttpServletResponse response) {
-        String items_per_page = request.getParameter("items_per_page");
+        HttpSession session = request.getSession();
+        String items_per_page;
+        synchronized (session) {
+            items_per_page = (String) session.getAttribute("itemsPerPage");
+        }
         if(items_per_page == null){
             items_per_page = "10";
         }

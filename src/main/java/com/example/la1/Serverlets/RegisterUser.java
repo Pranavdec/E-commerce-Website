@@ -1,5 +1,6 @@
-package com.example.la1;
+package com.example.la1.Serverlets;
 
+import com.example.la1.Database.RegisterUserDatabase;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;

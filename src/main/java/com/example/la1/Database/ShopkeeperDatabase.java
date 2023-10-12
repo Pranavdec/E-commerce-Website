@@ -1,4 +1,6 @@
-package com.example.la1;
+package com.example.la1.Database;
+
+import com.example.la1.Database.LoginUserDatabase;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

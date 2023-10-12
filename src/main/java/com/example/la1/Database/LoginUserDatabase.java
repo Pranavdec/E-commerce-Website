@@ -1,15 +1,29 @@
-package com.example.la1;
+package com.example.la1.Database;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Properties;
 
-public class LoginShopkeeperDatabase {
+public class LoginUserDatabase {
+    public static Properties getDbProperties(){
+        Properties prop = new Properties();
+
+        ClassLoader classLoader = RegisterUserDatabase.class.getClassLoader();
+
+        try(InputStream inputStream = classLoader.getResourceAsStream("db.properties")) {
+            prop.load(inputStream);
+        } catch (IOException ex) {
+            System.out.println("Error: " + ex.getMessage());
+        }
+        return  prop;
+    }
 
     public static String Query(String email, String user_password) {
-        Properties props = LoginUserDatabase.getDbProperties();
+        Properties props = getDbProperties();
 
         String url = props.getProperty("db.url");
         String user = props.getProperty("db.user");
@@ -18,7 +32,7 @@ public class LoginShopkeeperDatabase {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection(url, user, password);
 
-            String query = "SELECT * FROM shopkeeper WHERE email = ?";
+            String query = "SELECT * FROM User WHERE email = ?";
             try (PreparedStatement st = con.prepareStatement(query)) {
                 st.setString(1, email);
 
@@ -27,7 +41,7 @@ public class LoginShopkeeperDatabase {
                 if (rs.next()) {
                     String password_database = rs.getString("password");
                     if (password_database.equals(user_password)) {
-                        return rs.getString("Companyname");
+                        return "Success";
                     } else {
                         return "Incorrect password.";
                     }

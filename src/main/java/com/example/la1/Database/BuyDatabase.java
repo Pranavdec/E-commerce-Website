@@ -1,4 +1,4 @@
-package com.example.la1;
+package com.example.la1.Database;
 
 import java.sql.*;
 import java.util.*;
@@ -13,8 +13,8 @@ public class BuyDatabase {
 
         Connection con = null;
 
-        List<Map<String, Integer>> successful = new ArrayList<>();
-        List<Map<String, Integer>> unsuccessful = new ArrayList<>();
+        List<Map<String, Object>> successful = new ArrayList<>();
+        List<Map<String, Object>> unsuccessful = new ArrayList<>();
 
         HashMap<String, Object> result = new HashMap<>();
 
@@ -33,7 +33,7 @@ public class BuyDatabase {
                 int item_id = rs.getInt("item_id");
                 int quantity = rs.getInt("quantity");
 
-                String query2 = "SELECT quantity, company_name FROM Item WHERE item_id = ?";
+                String query2 = "SELECT quantity, company_name, price, item_name FROM Item WHERE item_id = ?";
                 PreparedStatement st2 = con.prepareStatement(query2);
                 st2.setInt(1, item_id);
                 ResultSet rs2 = st2.executeQuery();
@@ -42,6 +42,8 @@ public class BuyDatabase {
                     int available_quantity = rs2.getInt("quantity");
                     if (available_quantity >= quantity) {
                         String company_name = rs2.getString("company_name");
+                        String item_name = rs2.getString("item_name");
+                        double price = rs2.getDouble("price");
                         String query3 = "INSERT INTO Transaction(user_email, item_id, quantity, company_name) VALUES(?, ?, ?, ?)";
                         PreparedStatement st3 = con.prepareStatement(query3);
                         st3.setString(1, email);
@@ -61,15 +63,18 @@ public class BuyDatabase {
                         st5.setInt(2, item_id);
                         st5.executeUpdate();
 
-                        Map<String, Integer> successEntry = new HashMap<>();
+                        Map<String, Object> successEntry = new HashMap<>();
                         successEntry.put("item_id", item_id);
+                        successEntry.put("item_name", item_name);
                         successEntry.put("quantity", quantity);
+                        successEntry.put("price", price);
                         successful.add(successEntry);
                     } else {
-                        Map<String, Integer> unsuccessEntry = new HashMap<>();
-                        unsuccessEntry.put("item_id", item_id);
-                        unsuccessEntry.put("quantity", quantity);
-                        unsuccessful.add(unsuccessEntry);
+                        Map<String, Object> unsuccessfulEntry = new HashMap<>();
+                        unsuccessfulEntry.put("item_id", item_id);
+                        unsuccessfulEntry.put("item_name", rs2.getString("item_name"));
+                        unsuccessfulEntry.put("quantity", quantity);
+                        unsuccessful.add(unsuccessfulEntry);
                     }
                 }
             }

@@ -6,7 +6,7 @@
 
     <servlet>
         <servlet-name>RegisterUser</servlet-name>
-        <servlet-class>com.example.la1.RegisterUser</servlet-class>
+        <servlet-class>com.example.la1.Serverlets.RegisterUser</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>RegisterUser</servlet-name>
@@ -15,7 +15,7 @@
 
     <servlet>
         <servlet-name>LoginUser</servlet-name>
-        <servlet-class>com.example.la1.LoginUser</servlet-class>
+        <servlet-class>com.example.la1.Serverlets.LoginUser</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginUser</servlet-name>
@@ -24,7 +24,7 @@
 
     <servlet>
         <servlet-name>RegisterShopkeeper</servlet-name>
-        <servlet-class>com.example.la1.RegisterShopkeeper</servlet-class>
+        <servlet-class>com.example.la1.Serverlets.RegisterShopkeeper</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>RegisterShopkeeper</servlet-name>
@@ -33,7 +33,7 @@
 
     <servlet>
         <servlet-name>LoginShopkeeper</servlet-name>
-        <servlet-class>com.example.la1.LoginShopkeeper</servlet-class>
+        <servlet-class>com.example.la1.Serverlets.LoginShopkeeper</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginShopkeeper</servlet-name>
@@ -42,7 +42,7 @@
 
     <servlet>
         <servlet-name>Home</servlet-name>
-        <servlet-class>com.example.la1.Home</servlet-class>
+        <servlet-class>com.example.la1.Serverlets.Home</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Home</servlet-name>
@@ -51,7 +51,7 @@
 
     <servlet>
         <servlet-name>HomeShopkeeper</servlet-name>
-        <servlet-class>com.example.la1.Home</servlet-class>
+        <servlet-class>com.example.la1.Serverlets.Home</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeShopkeeper</servlet-name>
@@ -60,7 +60,7 @@
 
     <servlet>
         <servlet-name>UpdateCartQuantityServlet</servlet-name>
-        <servlet-class>com.example.la1.UpdateCartQuantityServlet</servlet-class>
+        <servlet-class>com.example.la1.Serverlets.UpdateCartQuantityServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>UpdateCartQuantityServlet</servlet-name>
@@ -69,7 +69,7 @@
 
     <servlet>
         <servlet-name>Cart</servlet-name>
-        <servlet-class>com.example.la1.CartPage</servlet-class>
+        <servlet-class>com.example.la1.Serverlets.CartPage</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Cart</servlet-name>
@@ -78,7 +78,7 @@
 
     <servlet>
         <servlet-name>Buy</servlet-name>
-        <servlet-class>com.example.la1.BuyItems</servlet-class>
+        <servlet-class>com.example.la1.Serverlets.BuyItems</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Buy</servlet-name>
@@ -87,7 +87,7 @@
 
     <servlet>
         <servlet-name>AddCart</servlet-name>
-        <servlet-class>com.example.la1.AddItemCart</servlet-class>
+        <servlet-class>com.example.la1.Serverlets.AddItemCart</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>AddCart</servlet-name>
@@ -96,7 +96,7 @@
 
     <servlet>
         <servlet-name>ItemDetails</servlet-name>
-        <servlet-class>com.example.la1.UpdateItemPage</servlet-class>
+        <servlet-class>com.example.la1.Serverlets.UpdateItemPage</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ItemDetails</servlet-name>
@@ -105,7 +105,7 @@
 
     <servlet>
         <servlet-name>AddItem</servlet-name>
-        <servlet-class>com.example.la1.AddItemPage</servlet-class>
+        <servlet-class>com.example.la1.Serverlets.AddItemPage</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>AddItem</servlet-name>
@@ -114,7 +114,7 @@
 
     <servlet>
         <servlet-name>DeleteItemServlet</servlet-name>
-        <servlet-class>com.example.la1.DeleteItemCart</servlet-class>
+        <servlet-class>com.example.la1.Serverlets.DeleteItemCart</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>DeleteItemServlet</servlet-name>
@@ -123,7 +123,7 @@
 
     <servlet>
         <servlet-name>Logout</servlet-name>
-        <servlet-class>com.example.la1.LogoutUser</servlet-class>
+        <servlet-class>com.example.la1.Serverlets.LogoutUser</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Logout</servlet-name>
@@ -133,7 +133,7 @@
 
     <servlet>
         <servlet-name>LogoutS</servlet-name>
-        <servlet-class>com.example.la1.LoginShopkeeper</servlet-class>
+        <servlet-class>com.example.la1.Serverlets.LoginShopkeeper</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LogoutS</servlet-name>
@@ -142,7 +142,7 @@
 
     <servlet>
         <servlet-name>Report</servlet-name>
-        <servlet-class>com.example.la1.Reports</servlet-class>
+        <servlet-class>com.example.la1.Serverlets.Reports</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Report</servlet-name>
