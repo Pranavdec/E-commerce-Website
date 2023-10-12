@@ -49,6 +49,7 @@
                     <label for="itemCategory">Item Category:</label>
                     <input type="text" id="itemCategory" name="itemCategory" class="form-control" value="<%= itemDetails.get("category") %>" />
                 </div>
+                <input type="hidden" name="itemPath" value="<%= itemDetails.get("image_path") %>" />
                 <div class="form-group">
                     <label for="file">Item Image:</label>
                     <input type="file" name="file" id="file">

@@ -40,7 +40,6 @@ public class AddItemCartDatabase {
             Class.forName("com.mysql.cj.jdbc.Driver");
             try (Connection con = DriverManager.getConnection(url, user, password);
                  PreparedStatement st = con.prepareStatement(query)) {
-
                 st.setString(1, email);
                 st.setInt(2, item_id);
                 ResultSet rs = st.executeQuery();
@@ -107,6 +106,28 @@ public class AddItemCartDatabase {
                 st.setInt(1, quantity);
                 st.setInt(2, cart_id);
                 st.setString(3, email);
+
+                st.executeUpdate();
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void DeleteCart(String cart_id){
+        Properties props = LoginUserDatabase.getDbProperties();
+
+        String url = props.getProperty("db.url");
+        String user = props.getProperty("db.user");
+        String password = props.getProperty("db.passwd");
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection(url, user, password);
+
+            String query = "DELETE FROM cart WHERE cart_id = ?";
+            try (PreparedStatement st = con.prepareStatement(query)) {
+                st.setString(1, cart_id);
 
                 st.executeUpdate();
             }

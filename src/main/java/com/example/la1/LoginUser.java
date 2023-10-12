@@ -27,8 +27,9 @@ public class LoginUser extends HttpServlet{
             HttpSession session = request.getSession();
             synchronized(session) {
                 session.setAttribute("user", email);
+                IndexPage.CreateCards(request, response);
             }
-            IndexPage.CreateCards(request, response);
+
         } else {
             request.setAttribute("error", query);
             dispatcher.forward(request, response);

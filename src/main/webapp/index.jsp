@@ -9,3 +9,16 @@
     </div>
 </div>
 <%@ include file="footer.jsp"%>
+
+
+<script type="text/javascript">
+    window.addEventListener('load', function() {
+        let userExists = <%= (user != null) ? "true" : "false" %>;
+
+        let submitButtons = document.querySelectorAll('input[type="submit"]');
+        for(let i = 0; i < submitButtons.length; i++) {
+            submitButtons[i].disabled = !userExists;
+        }
+    });
+</script>
+

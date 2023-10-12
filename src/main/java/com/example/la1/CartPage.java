@@ -46,6 +46,11 @@ public class CartPage extends HttpServlet {
             cartHtml.append("<input type=\"submit\" value=\"Save\" class=\"btn btn-primary\">");
             cartHtml.append("</form>");
 
+            cartHtml.append("<form action=\"DeleteItemServlet\" method=\"post\" id=\"deleteForm-").append(cartId).append("\">");
+            cartHtml.append("<input type=\"hidden\" name=\"cartId\" value=\"").append(cartId).append("\">");
+            cartHtml.append("<input type=\"submit\" value=\"Delete\" class=\"btn btn-danger\">");
+            cartHtml.append("</form>");
+
             cartHtml.append("</div></div>");
             cartHtml.append("</div>");
         }
@@ -54,5 +59,7 @@ public class CartPage extends HttpServlet {
         request.getRequestDispatcher("cart.jsp").forward(request, response);
     }
 
-
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        doGet(request, response);
+    }
 }

@@ -8,5 +8,9 @@
             <%= request.getAttribute("cartHtml") %>
         </div>
     </div>
+    <% String buyUrl = "buy"; %>
+    <form action="<%= buyUrl %>" method="post">
+        <button type="submit">Buy</button>
+    </form>
 </div>
 <%@ include file="footer.jsp"%>

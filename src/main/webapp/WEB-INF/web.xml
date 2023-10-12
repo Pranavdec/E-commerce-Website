@@ -77,6 +77,15 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>Buy</servlet-name>
+        <servlet-class>com.example.la1.buyItems</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Buy</servlet-name>
+        <url-pattern>/buy</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>AddCart</servlet-name>
         <servlet-class>com.example.la1.AddItemCart</servlet-class>
     </servlet>
@@ -101,6 +110,15 @@
     <servlet-mapping>
         <servlet-name>AddItem</servlet-name>
         <url-pattern>/itemAdd</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DeleteItemServlet</servlet-name>
+        <servlet-class>com.example.la1.DeleteItemCart</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeleteItemServlet</servlet-name>
+        <url-pattern>/DeleteItemServlet</url-pattern>
     </servlet-mapping>
 
     <welcome-file-list>

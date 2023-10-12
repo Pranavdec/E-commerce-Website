@@ -63,6 +63,7 @@ public class ShopkeeperDatabase {
                     item_details.put("quantity", rs.getString("quantity"));
                     item_details.put("description", rs.getString("description"));
                     item_details.put("category", rs.getString("category"));
+                    item_details.put("image_path", rs.getString("image_path"));
                     return item_details;
                 }
             }

@@ -48,22 +48,25 @@ public class UpdateItemPage extends HttpServlet {
         String item_quantity = request.getParameter("itemQuantity");
         String item_description = request.getParameter("itemDescription");
         String item_category = request.getParameter("itemCategory");
+        String item_path = request.getParameter("itemPath");
 
         Part filePart = request.getPart("file");
         String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
 
-        String appPath = request.getServletContext().getRealPath("");
-        String savePath = appPath + File.separator + "images" + File.separator + fileName;
+        if (!fileName.isEmpty()) {
+            String appPath = request.getServletContext().getRealPath("");
+            String savePath = appPath + File.separator + "images" + File.separator + fileName;
 
-        try (InputStream fileContent = filePart.getInputStream()) {
-            Files.copy(fileContent, Paths.get(savePath), StandardCopyOption.REPLACE_EXISTING);
+            try (InputStream fileContent = filePart.getInputStream()) {
+                Files.copy(fileContent, Paths.get(savePath), StandardCopyOption.REPLACE_EXISTING);
+            }
+            item_path = "images" + File.separator + fileName;
         }
 
-        String item_image_path = "images" + File.separator + fileName;
-
-        ShopkeeperDatabase.UpdateDetails(item_name, item_price, item_quantity, item_description, item_category, item_id,item_image_path);
+        ShopkeeperDatabase.UpdateDetails(item_name, item_price, item_quantity, item_description, item_category, item_id, item_path);
 
         doGet(request, response);
 
     }
+
 }

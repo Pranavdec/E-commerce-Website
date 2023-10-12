@@ -23,6 +23,10 @@ public class LoginShopkeeper extends HttpServlet{
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
         String query = LoginShopkeeperDatabase.Query(email, password);
+        if (query.equals("Email does not exist in the database.")){
+            request.setAttribute("error", query);
+            dispatcher.forward(request, response);
+        }
         if (query.equals("Incorrect password.")) {
             request.setAttribute("error", query);
             dispatcher.forward(request, response);

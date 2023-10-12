@@ -10,10 +10,10 @@
     <h1>Welcome to Our Grocery Store</h1>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-            <a class="navbar-brand" href="#">Navbar</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+<%--            <a class="navbar-brand" href="">Navbar</a>--%>
+<%--            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">--%>
+<%--                <span class="navbar-toggler-icon"></span>--%>
+<%--            </button>--%>
             <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
                 <div class="d-flex me-auto">
                     <ul class="navbar-nav">
@@ -22,10 +22,12 @@
                             <a class="nav-link active" aria-current="page" href="<%=home_url %>">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Update</a>
+                            <% String update_url = "itemList"; %>
+                            <a class="nav-link" href="<%= update_url %>">Update</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link">Add</a>
+                            <% String add_url = "itemAdd"; %>
+                            <a class="nav-link" href="<%= add_url%>">Add</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link">Reports</a>
