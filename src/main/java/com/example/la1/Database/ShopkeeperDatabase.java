@@ -1,7 +1,5 @@
 package com.example.la1.Database;
 
-import com.example.la1.Database.LoginUserDatabase;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -199,6 +197,31 @@ public class ShopkeeperDatabase {
 
 
         } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+
+    public static List<String> GetUsers(String company_name){
+        String query = "Select DISTINCT (user_email) from Transaction where company_name = ?";
+        Properties props = LoginUserDatabase.getDbProperties();
+        String url = props.getProperty("db.url");
+        String user = props.getProperty("db.user");
+        String password = props.getProperty("db.passwd");
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection(url, user, password);
+
+            PreparedStatement st = con.prepareStatement(query);
+            st.setString(1, company_name);
+            ResultSet rs = st.executeQuery();
+            List<String> users = new ArrayList<>();
+            while (rs.next()) {
+                users.add(rs.getString("user_email"));
+            }
+            return users;
+        }
+        catch (Exception e) {
             System.out.println(e.getMessage());
             return null;
         }

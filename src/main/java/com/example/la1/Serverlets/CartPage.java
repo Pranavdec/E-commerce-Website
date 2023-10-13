@@ -43,7 +43,7 @@ public class CartPage extends HttpServlet {
             cartHtml.append("<form action=\"UpdateCartQuantityServlet\" method=\"get\">");
             cartHtml.append("<input type=\"hidden\" name=\"cartId\" value=\"").append(cartId).append("\">");
             cartHtml.append("<label for=\"quantity-").append(cartId).append("\">Quantity: </label>");
-            cartHtml.append("<input id=\"quantity-").append(cartId).append("\" type=\"number\" name=\"quantity\" value=\"").append(quantity).append("\">");
+            cartHtml.append("<input id=\"quantity-").append(cartId).append("\" type=\"number\" name=\"quantity\" min=\"1\" value=\"1\"").append(quantity).append("\">");
             cartHtml.append("<input type=\"submit\" value=\"Save\" class=\"btn btn-primary\">");
             cartHtml.append("</form>");
 

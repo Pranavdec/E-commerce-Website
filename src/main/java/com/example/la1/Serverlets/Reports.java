@@ -7,34 +7,59 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
+import java.util.List;
+
 public class Reports extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) {
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("reports.jsp");
-        try {
-            dispatcher.forward(request, response);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        HttpSession session = request.getSession();
+        synchronized (session) {
+            String company_name = (String) session.getAttribute("Shopkeeper");
+            try {
+                List<String> users = ShopkeeperDatabase.GetUsers(company_name);
+                request.setAttribute("users", users);
+                dispatcher.forward(request, response);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
         }
-
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
         synchronized (session){
             String company_name = (String) session.getAttribute("Shopkeeper");
-            String StartDate = request.getParameter("startDate");
-            String EndDate = request.getParameter("endDate");
+            String reportType = request.getParameter("reportType");
+            List<String> users = ShopkeeperDatabase.GetUsers(company_name);
+            request.setAttribute("users", users);
 
-            String content = ShopkeeperDatabase.GetReport(company_name, StartDate, EndDate);
-            request.setAttribute("content", content);
+            if (reportType.equals("1")){
+                String StartDate = request.getParameter("startDate");
+                String EndDate = request.getParameter("endDate");
+                String content = ShopkeeperDatabase.GetReport(company_name, StartDate, EndDate);
+                request.setAttribute("content", content);
 
-            RequestDispatcher dispatcher = request.getRequestDispatcher("reports.jsp");
-            try {
-                dispatcher.forward(request, response);
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
+                RequestDispatcher dispatcher = request.getRequestDispatcher("reports.jsp");
+                try {
+                    dispatcher.forward(request, response);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
             }
+            else{
+                request.setAttribute("content", "content");
+
+                RequestDispatcher dispatcher = request.getRequestDispatcher("reports.jsp");
+                try {
+                    dispatcher.forward(request, response);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+
+
+
         }
 
     }
