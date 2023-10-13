@@ -51,7 +51,7 @@
 
     <servlet>
         <servlet-name>HomeShopkeeper</servlet-name>
-        <servlet-class>com.example.la1.Serverlets.Home</servlet-class>
+        <servlet-class>com.example.la1.Serverlets.HomeShopkeeper</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeShopkeeper</servlet-name>

@@ -38,11 +38,8 @@ public class LoginShopkeeper extends HttpServlet{
                 session.setAttribute("Shopkeeper_email", email);
                 session.setAttribute("Shopkeeper", query);
             }
-            try {
-                ShopkeeperPage.Home(request, response);
-            } catch (ClassNotFoundException e) {
-                throw new RuntimeException(e);
-            }
+
+            response.sendRedirect("home_shopkeeper");
 
         }
 

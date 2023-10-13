@@ -12,7 +12,7 @@
                 <div class="d-flex me-auto">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <% String home_url = "login_shopkeeper"; %>
+                            <% String home_url = "home_shopkeeper"; %>
                             <a class="nav-link active" aria-current="page" href="<%=home_url %>">Home</a>
                         </li>
                         <li class="nav-item">

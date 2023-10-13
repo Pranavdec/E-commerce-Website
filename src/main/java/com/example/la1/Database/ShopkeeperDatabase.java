@@ -202,6 +202,74 @@ public class ShopkeeperDatabase {
         }
     }
 
+    public static String GetReport1(String company_name, String user_email){
+        System.out.println(company_name);
+        String query = """
+                SELECT
+                    i.item_name,
+                    t.quantity,
+                    t.user_email
+                FROM
+                    Transaction t
+                JOIN
+                    Item i ON t.item_id = i.item_id
+                WHERE
+                    t.company_name = ?
+                    AND
+                    t.user_email = ?;
+                                
+                """;
+
+        Properties props = LoginUserDatabase.getDbProperties();
+
+        String url = props.getProperty("db.url");
+        String user = props.getProperty("db.user");
+        String password = props.getProperty("db.passwd");
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection(url, user, password);
+
+            PreparedStatement st = con.prepareStatement(query);
+            st.setString(1, company_name);
+            st.setString(2, user_email);
+
+            ResultSet rs = st.executeQuery();
+            StringBuilder content = new StringBuilder();
+            content.append("<table class=\"table table-striped\">");
+            content.append("<thead>");
+            content.append("<tr>");
+            content.append("<th scope=\"col\">User Email</th>");
+            content.append("<th scope=\"col\">Item Name</th>");
+            content.append("<th scope=\"col\">Quantity Sold</th>");
+            content.append("</tr>");
+            content.append("</thead>");
+            content.append("<tbody>");
+            while (rs.next()) {
+                content.append("<tr>");
+                content.append("<td>");
+                content.append(rs.getString("user_email"));
+                content.append("</td>");
+                content.append("<td>");
+                content.append(rs.getString("item_name"));
+                content.append("</td>");
+                content.append("<td>");
+                content.append(rs.getString("quantity"));
+                content.append("</td>");
+                content.append("</tr>");
+            }
+            content.append("</tbody>");
+            content.append("</table>");
+
+            System.out.println(content.toString());
+
+            return content.toString();
+
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
     public static List<String> GetUsers(String company_name){
         String query = "Select DISTINCT (user_email) from Transaction where company_name = ?";
         Properties props = LoginUserDatabase.getDbProperties();

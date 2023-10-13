@@ -48,7 +48,9 @@ public class Reports extends HttpServlet {
                 }
             }
             else{
-                request.setAttribute("content", "content");
+                String user_email = request.getParameter("userSelect");
+                String content = ShopkeeperDatabase.GetReport1(company_name, user_email);
+                request.setAttribute("content", content);
 
                 RequestDispatcher dispatcher = request.getRequestDispatcher("reports.jsp");
                 try {
