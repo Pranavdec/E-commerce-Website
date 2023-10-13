@@ -1,4 +1,4 @@
-package com.example.la1.Serverlets;
+package com.example.la1.Servlet;
 
 import com.example.la1.Database.AddItemCartDatabase;
 import jakarta.servlet.ServletException;
@@ -16,6 +16,11 @@ public class CartPage extends HttpServlet {
         CreatePage(request, response);
 
     }
+
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        doGet(request, response);
+    }
+
     private static void CreatePage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String email = (String) request.getSession().getAttribute("user");
         List<Map<String, Object>> dataList = AddItemCartDatabase.GetData(email);
@@ -24,7 +29,7 @@ public class CartPage extends HttpServlet {
         for (Map<String, Object> row : dataList) {
             String itemName = (String) row.get("item_name");
             Integer cartId = (Integer) row.get("cart_id");
-            String imagePath = (String) row.get("image_path"); // Assuming this is a column in your result set
+            String imagePath = (String) row.get("image_path");
             String description = (String) row.get("description");
             BigDecimal price = (BigDecimal) row.get("price");
             Integer quantity = (Integer) row.get("quantity");
@@ -38,7 +43,7 @@ public class CartPage extends HttpServlet {
             cartHtml.append("<div class=\"card-body\">");
             cartHtml.append("<h5 class=\"card-title\">").append(itemName).append("</h5>");
             cartHtml.append("<p class=\"card-text\">").append(description).append("</p>");
-            cartHtml.append("<p class=\"card-text\">").append(price).append("</p>");
+            cartHtml.append("<p class=\"card-text\">Rupees: ").append(price).append("</p>");
 
             cartHtml.append("<form action=\"UpdateCartQuantityServlet\" method=\"get\">");
             cartHtml.append("<input type=\"hidden\" name=\"cartId\" value=\"").append(cartId).append("\">");
@@ -60,7 +65,5 @@ public class CartPage extends HttpServlet {
         request.getRequestDispatcher("cart.jsp").forward(request, response);
     }
 
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        doGet(request, response);
-    }
+
 }

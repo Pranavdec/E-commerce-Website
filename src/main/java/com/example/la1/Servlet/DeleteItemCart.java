@@ -1,4 +1,4 @@
-package com.example.la1.Serverlets;
+package com.example.la1.Servlet;
 
 import com.example.la1.Database.AddItemCartDatabase;
 import jakarta.servlet.ServletException;
@@ -14,7 +14,6 @@ public class DeleteItemCart extends HttpServlet{
         System.out.println("DeleteItemCart");
         String cart_id = request.getParameter("cartId");
         AddItemCartDatabase.DeleteCart(cart_id);
-        //send a get request to cart servlet
         request.getRequestDispatcher("cart").forward(request, response);
     }
 }

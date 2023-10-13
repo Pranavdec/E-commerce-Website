@@ -1,7 +1,6 @@
-package com.example.la1.Serverlets;
+package com.example.la1.Servlet;
 
 import com.example.la1.Database.LoginShopkeeperDatabase;
-import com.example.la1.ShopkeeperPage;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -9,7 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-import java.io.*;
+import java.io.IOException;
 
 public class LoginShopkeeper extends HttpServlet{
 

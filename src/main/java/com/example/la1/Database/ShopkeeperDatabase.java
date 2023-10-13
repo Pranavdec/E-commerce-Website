@@ -260,7 +260,7 @@ public class ShopkeeperDatabase {
             content.append("</tbody>");
             content.append("</table>");
 
-            System.out.println(content.toString());
+            System.out.println(content);
 
             return content.toString();
 

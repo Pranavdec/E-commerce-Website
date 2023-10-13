@@ -1,4 +1,4 @@
-package com.example.la1.Serverlets;
+package com.example.la1.Servlet;
 
 import com.example.la1.IndexPage;
 import jakarta.servlet.http.HttpServlet;

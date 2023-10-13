@@ -49,7 +49,7 @@ public class IndexPage {
                     cardsHtml.append("<div class=\"card-body\">");
                     cardsHtml.append("<h5 class=\"card-title\">").append(rs.getString("item_name")).append("</h5>");
                     cardsHtml.append("<p class=\"card-text\">").append(rs.getString("description")).append("</p>");
-                    cardsHtml.append("<p class=\"card-text\">").append(rs.getString("price")).append("</p>");
+                    cardsHtml.append("<p class=\"card-text\">Rupees: ").append(rs.getString("price")).append("</p>");
                     cardsHtml.append("<form action=\"AddItemCartServlet\" method=\"post\">");
                     cardsHtml.append("<input type=\"hidden\" name=\"item_id\" value=\"").append(item_id).append("\">");
                     cardsHtml.append("<input type=\"submit\" value=\"Add to Cart\" class=\"btn btn-primary\">");

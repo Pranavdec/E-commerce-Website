@@ -23,7 +23,7 @@
                 </div>
             </form>
 
-            <form action="itemList" method="post" enctype="multipart/form-data">
+            <form action="itemList" method="post" enctype="multipart/form-data" onsubmit="validateForm(event)">
                 <%
                     Dictionary<String, String> itemDetails = (Dictionary<String, String>) request.getAttribute("itemDetails");
                     if (itemDetails != null) {
@@ -39,7 +39,7 @@
                 </div>
                 <div class="form-group">
                     <label for="itemQuantity">Item Quantity:</label>
-                    <input type="text" id="itemQuantity" name="itemQuantity" class="form-control" value="<%= itemDetails.get("quantity") %>" />
+                    <input type="number" id="itemQuantity" name="itemQuantity" class="form-control" value="<%= itemDetails.get("quantity") %>" />
                 </div>
                 <div class="form-group">
                     <label for="itemDescription">Item Description:</label>
@@ -64,5 +64,32 @@
         </div>
     </div>
 </div>
+
+<script>
+    function validateForm(event){
+        let itemName = document.getElementById("itemName").value;
+        let itemPrice = document.getElementById("itemPrice").value;
+        let itemCategory = document.getElementById("itemCategory").value;
+
+        if(itemName.length > 50){
+            alert("Item name must be less than 50 characters");
+            event.preventDefault()
+            return false;
+        }
+
+        if(itemCategory.length > 30){
+            alert("Item name must be less than 30 characters");
+            event.preventDefault()
+            return false;
+        }
+
+        if (!itemPrice.match(/^\d+(\.\d+)?$/)) {
+            alert("Item price must be a valid number");
+            event.preventDefault();
+            return false;
+        }
+
+    }
+</script>
 
 <%@ include file="footer.jsp"%>

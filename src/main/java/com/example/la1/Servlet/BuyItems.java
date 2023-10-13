@@ -1,4 +1,4 @@
-package com.example.la1.Serverlets;
+package com.example.la1.Servlet;
 
 import com.example.la1.Database.BuyDatabase;
 import jakarta.servlet.ServletException;
@@ -26,7 +26,9 @@ public class BuyItems extends HttpServlet {
         try {
             HashMap<String, Object> result = BuyDatabase.Query(email);
 
+            @SuppressWarnings("unchecked")
             List<Map<String, Object>> successful = (List<Map<String, Object>>) result.get("successful");
+            @SuppressWarnings("unchecked")
             List<Map<String, Object>> unsuccessful = (List<Map<String, Object>>) result.get("unsuccessful");
 
             double totalCost = 0;
@@ -38,7 +40,7 @@ public class BuyItems extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html><head>");
             out.println("<title>Buy Items</title>");
-            out.println("<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css' integrity='sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z' crossorigin='anonymous'>");
+            out.println("<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css'>");
             out.println("</head><body>");
 
             out.println("<div class='container'>");
@@ -59,7 +61,7 @@ public class BuyItems extends HttpServlet {
             out.println("</tbody></table>");
 
 
-            out.println("<h3 class='text-right'>Total Cost: " + totalCost + "</h3>");
+            out.println("<h3 class='text-right'>Total Cost(Rupees): " + totalCost + "</h3>");
 
 
             out.println("<h1 class='mt-4'>Unsuccessful Items</h1>");

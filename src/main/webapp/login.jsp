@@ -18,18 +18,6 @@
     let email = document.forms["register"]["email"].value;
     let password = document.forms["register"]["password"].value;
 
-    if (email === "") {
-      alert("Email must be filled out");
-      event.preventDefault();
-      return false;
-    }
-
-    if (password === "") {
-      alert("Password must be filled out");
-      event.preventDefault();
-      return false;
-    }
-
     if(password.length >30){
       alert("Password must be less than 30 characters");
       event.preventDefault();
@@ -64,10 +52,10 @@
             </svg></div>
             <form class="text-center" method="post" action="${pageContext.request.contextPath}/login_user" onsubmit="formvalidation(event)">
               <div class="mb-3"><label>
-                <input class="form-control" type="email" name="email" placeholder="Email">
+                <input class="form-control" type="email" name="email" placeholder="Email" required>
               </label></div>
               <div class="mb-3"><label>
-                <input class="form-control" type="password" name="password" placeholder="Password">
+                <input class="form-control" type="password" name="password" placeholder="Password" required>
               </label></div>
               <div class="mb-3"><button class="btn btn-primary d-block w-100" type="submit">Login</button></div>
               <a class="text-muted" href="${pageContext.request.contextPath}/register_user">Register</a>
@@ -96,10 +84,10 @@
             <h1>shopkeeper</h1>
             <form class="text-center" method="post" action="${pageContext.request.contextPath}/login_shopkeeper" onsubmit="formvalidation(event)">
               <div class="mb-3"><label>
-                <input class="form-control" type="email" name="email" placeholder="Email">
+                <input class="form-control" type="email" name="email" placeholder="Email" required>
               </label></div>
               <div class="mb-3"><label>
-                <input class="form-control" type="password" name="password" placeholder="Password">
+                <input class="form-control" type="password" name="password" placeholder="Password" required>
               </label></div>
               <div class="mb-3"><button class="btn btn-primary d-block w-100" type="submit">Login</button></div>
               <a class="text-muted" href="${pageContext.request.contextPath}/register_shopkeeper">Register</a>
