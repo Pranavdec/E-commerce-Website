@@ -29,7 +29,7 @@ public class LoginUser extends HttpServlet{
             HttpSession session = request.getSession();
             synchronized(session) {
                 session.setAttribute("user", email);
-                IndexPage.CreateCards(request, response);
+                response.sendRedirect("home");
             }
 
         } else {
