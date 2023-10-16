@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="header.jsp" %>
 
+<div class="content">
 <div class="container mt-5">
 
     <% int totalPages = Integer.parseInt(request.getAttribute("totalPages").toString()); %>
@@ -14,19 +15,17 @@
         <input type="hidden" name="currentPage" id="currentPage" value="<%= request.getParameter("currentPage") != null ? request.getParameter("currentPage") : "1" %>">
     </form>
 
-    <div class="content">
-        <div class="row">
-            <%= request.getAttribute("cardsHtml") %>
-        </div>
-        <div class="pagination-controls">
-            <button type="button" class="btn btn-primary" id="prevButton" onclick="changePage(-1)">Previous</button>
-            <button type="button" class="btn btn-primary" id="nextButton" onclick="changePage(1)">Next</button>
-        </div>
+    <div class="row">
+        <%= request.getAttribute("cardsHtml") %>
     </div>
-
+    <div class="pagination-controls">
+        <button type="button" class="btn btn-primary" id="prevButton" onclick="changePage(-1)">Previous</button>
+        <button type="button" class="btn btn-primary" id="nextButton" onclick="changePage(1)">Next</button>
+    </div>
+    <br>
 
 </div>
-
+</div>
 <%@ include file="footer.jsp" %>
 
 <script type="text/javascript">
