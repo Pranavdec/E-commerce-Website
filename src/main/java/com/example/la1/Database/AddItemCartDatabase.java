@@ -61,7 +61,7 @@ public class AddItemCartDatabase {
         String password = props.getProperty("db.passwd");
 
         List<Map<String, Object>> dataList = new ArrayList<>();
-        String query = "SELECT I.description,I.company_name,I.item_name,I.price,C.quantity,C.cart_id " +
+        String query = "SELECT I.description,I.company_name,I.item_name,I.price,C.quantity,I.image_path,C.cart_id " +
                 "FROM item AS I, cart AS C " +
                 "WHERE I.item_id = C.item_id AND C.user_email = ?";
         try {

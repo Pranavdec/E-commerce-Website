@@ -208,7 +208,8 @@ public class ShopkeeperDatabase {
                 SELECT
                     i.item_name,
                     t.quantity,
-                    t.user_email
+                    t.user_email,
+                    t.time
                 FROM
                     Transaction t
                 JOIN
@@ -241,6 +242,7 @@ public class ShopkeeperDatabase {
             content.append("<th scope=\"col\">User Email</th>");
             content.append("<th scope=\"col\">Item Name</th>");
             content.append("<th scope=\"col\">Quantity Sold</th>");
+            content.append("<th scope=\"col\">Time</th>");
             content.append("</tr>");
             content.append("</thead>");
             content.append("<tbody>");
@@ -254,6 +256,9 @@ public class ShopkeeperDatabase {
                 content.append("</td>");
                 content.append("<td>");
                 content.append(rs.getString("quantity"));
+                content.append("</td>");
+                content.append("<td>");
+                content.append(rs.getString("time"));
                 content.append("</td>");
                 content.append("</tr>");
             }

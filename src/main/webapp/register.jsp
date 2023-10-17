@@ -173,19 +173,19 @@
             </svg></div>
             <form class="text-center" method="post" onsubmit="formvalidation(event)" name="register" action="${pageContext.request.contextPath}/register_user">
               <div class="mb-3"><label>
-                <input class="form-control" type="email" name="email" placeholder="Email">
+                <input class="form-control" type="email" name="email" placeholder="Email" required>
               </label></div>
               <div class="mb-3"><label>
-                <input class="form-control"  name="contact" placeholder="Phone Number">
+                <input class="form-control"  name="contact" placeholder="Phone Number" required>
               </label></div>
               <div class="mb-3"><label>
-                <input class="form-control"  name="address" placeholder="Address">
+                <input class="form-control"  name="address" placeholder="Address" required>
               </label></div>
               <div class="mb-3"><label>
-                <input class="form-control" type="password" name="password" placeholder="Password">
+                <input class="form-control" type="password" name="password" placeholder="Password" required>
               </label></div>
               <div class="mb-3"><label>
-                <input class="form-control" type="password" name="password_confirm" placeholder="Confirm Password">
+                <input class="form-control" type="password" name="password_confirm" placeholder="Confirm Password" required>
               </label></div>
 
               <div class="mb-3"><button class="btn btn-primary d-block w-100" type="submit">Register</button></div>
@@ -214,22 +214,22 @@
             </svg></div>
             <form class="text-center" method="post" onsubmit="formvalidation1(event)" name="register" action="${pageContext.request.contextPath}/register_shopkeeper">
               <div class="mb-3"><label>
-                <input class="form-control" type="email" name="email" placeholder="Email">
+                <input class="form-control" type="email" name="email" placeholder="Email" required>
               </label></div>
               <div class="mb-3"><label>
-                <input class="form-control"  name="contact" placeholder="Phone Number">
+                <input class="form-control"  name="contact" placeholder="Phone Number" required>
               </label></div>
               <div class="mb-3"><label>
-                <input class="form-control"  name="address" placeholder="Address">
+                <input class="form-control"  name="address" placeholder="Address" required>
               </label></div>
               <div class="mb-3"><label>
-                <input class="form-control"  name="company_name" placeholder="Company Name">
+                <input class="form-control"  name="company_name" placeholder="Company Name" required>
               </label></div>
               <div class="mb-3"><label>
-                <input class="form-control" type="password" name="password" placeholder="Password">
+                <input class="form-control" type="password" name="password" placeholder="Password" required>
               </label></div>
               <div class="mb-3"><label>
-                <input class="form-control" type="password" name="password_confirm" placeholder="Confirm Password">
+                <input class="form-control" type="password" name="password_confirm" placeholder="Confirm Password" required>
               </label></div>
 
               <div class="mb-3"><button class="btn btn-primary d-block w-100" type="submit">Register</button></div>
