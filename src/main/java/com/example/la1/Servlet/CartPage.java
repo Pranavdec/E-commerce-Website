@@ -5,6 +5,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -13,6 +14,13 @@ import java.util.Map;
 
 public class CartPage extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        HttpSession session = request.getSession();
+        synchronized (session) {
+            String email = (String) session.getAttribute("user");
+            if (email == null) {
+                request.getRequestDispatcher("login_user").forward(request, response);
+            }
+        }
         CreatePage(request, response);
 
     }

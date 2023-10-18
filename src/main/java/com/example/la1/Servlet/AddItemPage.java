@@ -17,6 +17,14 @@ import java.nio.file.StandardCopyOption;
 public class AddItemPage extends HttpServlet{
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        String email;
+        synchronized (session) {
+            email = (String) session.getAttribute("Shopkeeper");
+            if (email == null) {
+                request.getRequestDispatcher("login_user").forward(request, response);
+            }
+        }
         RequestDispatcher dispatcher = request.getRequestDispatcher("additem.jsp");
         dispatcher.forward(request, response);
     }
@@ -25,6 +33,13 @@ public class AddItemPage extends HttpServlet{
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
+        String email;
+        synchronized (session) {
+            email = (String) session.getAttribute("Shopkeeper");
+            if (email == null) {
+                request.getRequestDispatcher("login_user").forward(request, response);
+            }
+        }
         String company_name = (String) session.getAttribute("Shopkeeper");
         String item_name = request.getParameter("itemName");
         String item_price = request.getParameter("itemPrice");

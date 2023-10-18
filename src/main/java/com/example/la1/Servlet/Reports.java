@@ -2,20 +2,26 @@ package com.example.la1.Servlet;
 
 import com.example.la1.Database.ShopkeeperDatabase;
 import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
+import java.io.IOException;
 import java.util.List;
 
 public class Reports extends HttpServlet {
-    public void doGet(HttpServletRequest request, HttpServletResponse response) {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("reports.jsp");
         HttpSession session = request.getSession();
         synchronized (session) {
             String company_name = (String) session.getAttribute("Shopkeeper");
+
+            if (company_name == null) {
+                request.getRequestDispatcher("login_user").forward(request, response);
+            }
             try {
                 List<String> users = ShopkeeperDatabase.GetUsers(company_name);
                 request.setAttribute("users", users);

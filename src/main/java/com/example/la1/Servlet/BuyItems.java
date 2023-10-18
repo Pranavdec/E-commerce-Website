@@ -13,9 +13,18 @@ import java.util.List;
 import java.util.Map;
 
 public class BuyItems extends HttpServlet {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("login_user").forward(request, response);
+    }
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         HttpSession session = request.getSession();
-        String email = (String) session.getAttribute("user");
+        String email;
+        synchronized (session) {
+            email = (String) session.getAttribute("user");
+            if (email == null) {
+                request.getRequestDispatcher("login_user").forward(request, response);
+            }
+        }
         String homeUrl = "home";
 
         if (email == null) {

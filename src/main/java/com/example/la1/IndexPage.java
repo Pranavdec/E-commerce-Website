@@ -91,6 +91,8 @@ public class IndexPage {
                     cardsHtml.append("<p class=\"card-text\">Rupees: ").append(rs.getString("price")).append("</p>");
                     cardsHtml.append("<form action=\"AddItemCartServlet\" method=\"post\">");
                     cardsHtml.append("<input type=\"hidden\" name=\"item_id\" value=\"").append(item_id).append("\">");
+                    cardsHtml.append("<label for=\"quantity-").append(item_id).append("\">Quantity: </label>");
+                    cardsHtml.append("<input id=\"quantity-").append(item_id).append("\" type=\"number\" name=\"quantity\" min=\"1\" value=\"1\" required>");
                     cardsHtml.append("<input type=\"submit\" value=\"Add to Cart\" class=\"btn btn-primary\">");
                     cardsHtml.append("</form>");
                     cardsHtml.append("</div></div>");

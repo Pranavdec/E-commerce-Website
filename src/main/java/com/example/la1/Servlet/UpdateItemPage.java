@@ -17,7 +17,7 @@ import java.util.List;
 
 @MultipartConfig
 public class UpdateItemPage extends HttpServlet {
-    public void doGet(HttpServletRequest request, HttpServletResponse response) {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String selectedItem = request.getParameter("selectedItem");
         if (selectedItem != null && !selectedItem.isEmpty()) {
             Dictionary<String, String> itemDetails = ShopkeeperDatabase.GetItemDetails(selectedItem);
@@ -25,7 +25,14 @@ public class UpdateItemPage extends HttpServlet {
         }
 
         HttpSession session = request.getSession();
+        String email;
         synchronized (session){
+
+            email = (String) session.getAttribute("Shopkeeper");
+            if (email == null) {
+                request.getRequestDispatcher("login_user").forward(request, response);
+            }
+
             String company_name = (String) session.getAttribute("Shopkeeper");
             List<String> itemNames = ShopkeeperDatabase.GetItems(company_name);
             request.setAttribute("itemNames", itemNames);
@@ -42,6 +49,14 @@ public class UpdateItemPage extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        String email;
+        synchronized (session) {
+            email = (String) session.getAttribute("Shopkeeper");
+            if (email == null) {
+                request.getRequestDispatcher("login_user").forward(request, response);
+            }
+        }
         request.setCharacterEncoding("UTF-8");
         String item_id = request.getParameter("itemId");
         String item_name = request.getParameter("itemName");

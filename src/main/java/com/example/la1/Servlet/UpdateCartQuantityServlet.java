@@ -13,6 +13,10 @@ public class UpdateCartQuantityServlet extends HttpServlet{
         HttpSession session = request.getSession();
         synchronized (session) {
             String email = (String) session.getAttribute("user");
+
+            if (email == null) {
+                request.getRequestDispatcher("login_user").forward(request, response);
+            }
             Integer cart_id = Integer.parseInt(request.getParameter("cartId"));
             Integer quantity = Integer.parseInt(request.getParameter("quantity"));
             AddItemCartDatabase.UpdateCartQuantity(email, cart_id, quantity);
